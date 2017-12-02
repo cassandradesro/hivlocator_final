@@ -53,14 +53,43 @@ var LocatorModule = (function () {
 		}
 	}
 
+	  var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+	  var icons = {
+	    clinic: {
+	      icon: iconBase + 'clinic.svg'
+	    },
+	    testing: {
+	      icon: iconBase + 'testing.svg'
+	    },
+	    ryan: {
+	      icon: iconBase + 'ryan.svg'
+	    }
+	  };
 
+	  var features = [
+	    {
+	      position: new google.maps.LatLng(-33.91721, 151.22630),
+	      type: 'clinic'
+	    }, 
+	    {
+	      position: new google.maps.LatLng(-33.91721, 151.22630),
+	      type: 'testing'
+	    }, {
+	      position: new google.maps.LatLng(-33.91721, 151.22630),
+	      type: 'ryan'
+	    }, 
+	  ];
 
+	  // Create markers.
+	  features.forEach(function(feature) {
+	    var marker = new google.maps.Marker({
+	      position: feature.position,
+	      icon: icons[feature.type].icon,
+	      map: map
+	    });
+	  });
+	}
 
-		
-
-		
-		
-	
 
 	function init () {
 		setupListeners();
