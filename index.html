@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+
+    <link href="styles.css" rel="stylesheet" />
+
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <div id="search">
+      <div class="form">
+        <h1>Search HIV Testing Locations in Your City:</h1>
+        <label>Enter Zip Code: </label><input id="query" type="text" />
+        <button id="btn">Search</button>
+      </div>
+      <ul class="results"></ul>    
+    </div>
+    <script src="hivlocator.js"></script>
+    <script src="google-maps.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBs3JbTm5Mmh-oL70aSuANrBeSiUzhIXDk&callback=GoogleMapModule.init&libraries=places"
+    async defer></script>
+  </body>
+</html>
