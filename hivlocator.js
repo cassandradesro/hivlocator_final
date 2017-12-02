@@ -53,8 +53,8 @@ var LocatorModule = (function () {
 		}
 	}
 
-	  var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
-	  var icons = {
+	var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+	var icons = {
 	    clinic: {
 	      icon: iconBase + 'clinic.svg'
 	    },
@@ -64,24 +64,24 @@ var LocatorModule = (function () {
 	    ryan: {
 	      icon: iconBase + 'ryan.svg'
 	    }
-	  };
+	};
 
-	  var features = [
+	var features = [
 	    {
 	      position: new google.maps.LatLng(-33.91721, 151.22630),
 	      type: 'clinic'
 	    }, 
 	    {
-	      position: new google.maps.LatLng(-33.91721, 151.22630),
+	      position: new google.maps.LatLng(-34.91721, 151.22630),
 	      type: 'testing'
 	    }, {
-	      position: new google.maps.LatLng(-33.91721, 151.22630),
+	      position: new google.maps.LatLng(-35.91721, 151.22630),
 	      type: 'ryan'
 	    }, 
-	  ];
+	];
 
-	  // Create markers.
-	  features.forEach(function(feature) {
+	// Create markers.
+	features.forEach(function(feature) {
 	    var marker = new google.maps.Marker({
 	      position: feature.position,
 	      icon: icons[feature.type].icon,
