@@ -87,8 +87,8 @@ var LocatorModule = (function () {
 	      icon: icons[feature.type].icon,
 	      map: map
 	    });
-	  });
-	}
+	});
+	
 
 
 	function init () {
