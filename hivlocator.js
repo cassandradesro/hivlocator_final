@@ -59,11 +59,11 @@ var LocatorModule = (function () {
 	      icon: iconBase + 'clinic.svg'
 	    },
 	    testing: {
-	      icon: iconBase + 'testing.svg'
+	      icon: iconBase + 'testingcentermarker.svg'
 	    },
 	    ryan: {
 	      icon: iconBase + 'ryan.svg'
-	    }
+	    },
 	};
 
 	var features = [
@@ -94,7 +94,7 @@ var LocatorModule = (function () {
 	function init () {
 		setupListeners();
 		coordinates = GoogleMapModule.startingPoint;
-		console.log ('coordinates', coordinates)
+		console.log ('coordinates', coordinates);
 	}
 
 	shared.init = init
