@@ -8,6 +8,7 @@ var LocatorModule = (function () {
 		testing: [],
 		ryanwhite: []
 	};
+	
 	shared.markersByServiceType = markersByServiceType;
 
 	function setupListeners(){
@@ -58,7 +59,7 @@ var LocatorModule = (function () {
 					lng: parseFloat(provider.point.long)
 				}
 				markerData.content = `<div>${provider.title}<hr/>${provider.streetAddress}</div>`;
-				// markerData.icon = serviceTypeIcon;
+				markerData.icon = serviceTypeIcon;
 				var createdMarker = GoogleMapModule.createMarker(markerData);
 				markersByServiceType[ services[i].serviceType ].push(createdMarker);	
 			}
