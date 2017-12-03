@@ -3,6 +3,13 @@ var LocatorModule = (function () {
 
 	var BASE_URL = './locator.php?';
 
+	var markersByServiceType = {
+		clinics: [],
+		testing: [],
+		ryanwhite: []
+	};
+	shared.markersByServiceType = markersByServiceType;
+
 	function setupListeners(){
 		var btn = document.querySelector('#btn');
 		btn.addEventListener('click', search);
@@ -11,7 +18,9 @@ var LocatorModule = (function () {
 	function search (evt){
 		evt.preventDefault();
 		var input = document.querySelector('#query');
-		var query = input.value;
+		var query = input.value; // ZIP code
+
+		GoogleMapModule.recenterMapOnZip( query )
 
 		var fetchOptions = {
 			method: 'GET', 
@@ -23,8 +32,8 @@ var LocatorModule = (function () {
 
 
 		fetch(BASE_URL + queryString, fetchOptions)
-		.then(response => response.json())
-		.then(data => addLocationsToMap(data))
+			.then(response => response.json())
+			.then(data => addLocationsToMap(data))
 	}
 
 	function addLocationsToMap(data){
@@ -35,7 +44,9 @@ var LocatorModule = (function () {
 
 		for (var i = 0; i < services.length; i++) {
 			//for each of the services you'll loop through the providers array
-			var providers = services[i].providers
+			var providers = services[i].providers;
+			console.log("looping through " + services[i].serviceType + " providers");
+			var serviceTypeIcon = "img/" + services[i].serviceType + ".png";
 
 			for (var j = 0; j < providers.length; j++) {
 				var provider = providers[j]
@@ -47,12 +58,14 @@ var LocatorModule = (function () {
 					lng: parseFloat(provider.point.long)
 				}
 				markerData.content = `<div>${provider.title}<hr/>${provider.streetAddress}</div>`;
-
-				GoogleMapModule.createMarker(markerData);	
+				// markerData.icon = serviceTypeIcon;
+				var createdMarker = GoogleMapModule.createMarker(markerData);
+				markersByServiceType[ services[i].serviceType ].push(createdMarker);	
 			}
 		}
 	}
 
+	/*
 	var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
 	var icons = {
 	    clinic: {
@@ -88,7 +101,7 @@ var LocatorModule = (function () {
 	      map: map
 	    });
 	});
-	
+	*/
 
 
 	function init () {

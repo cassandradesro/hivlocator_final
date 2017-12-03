@@ -37,10 +37,10 @@ var GoogleMapModule = (function() {
 	//	
 	//}
 	function createMarker(place) {
-		var placeLatLng = place.coordinates;
 		var marker = new google.maps.Marker({
 			map: map,
-			position: placeLatLng
+			position: place.coordinates,
+			icon: place.icon
 		});
 
 		marker.addListener('click', function() {
@@ -48,16 +48,28 @@ var GoogleMapModule = (function() {
 			infowindow.open(map, marker);
 		})
 
+		return marker;
+
 	}
 	shared.createMarker = createMarker;
 
-	function searchForPlaces() {
 
+
+	function recenterMapOnZip(zip) {
+
+	}
+	shared.recenterMapOnZip = recenterMapOnZip;
+
+
+	// Call GoogleMapModule.searchForPlaces(term) to put places on map.
+
+	function searchForPlaces(term, radius) {
+		var r = radius || 500;
 		var service = new google.maps.places.PlacesService(map);
         service.nearbySearch({
           location: startingPoint,
-          radius: 500,
-          keyword: 'pizza'
+          radius: r,
+          keyword: term
         }, placeResults);
 	}
 	shared.searchForPlaces = searchForPlaces;
