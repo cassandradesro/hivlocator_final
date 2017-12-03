@@ -8,7 +8,7 @@ var LocatorModule = (function () {
 		testing: [],
 		ryanwhite: []
 	};
-	
+
 	shared.markersByServiceType = markersByServiceType;
 
 	function setupListeners(){
@@ -58,52 +58,13 @@ var LocatorModule = (function () {
 					lat: parseFloat(provider.point.lat), 
 					lng: parseFloat(provider.point.long)
 				}
-				markerData.content = `<div>${provider.title}<hr/>${provider.streetAddress}</div>`;
+				markerData.content = `<div class="marker-content"><a href="${provider.link} target="_blank" id="title">${provider.title}</a><br/><a href="" target="_blank" id="address">${provider.streetAddress}</a><br/<a href"" target="_blank">${provider.telephone}</a></div>`;
 				markerData.icon = serviceTypeIcon;
 				var createdMarker = GoogleMapModule.createMarker(markerData);
 				markersByServiceType[ services[i].serviceType ].push(createdMarker);	
 			}
 		}
 	}
-
-	/*
-	var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
-	var icons = {
-	    clinic: {
-	      icon: iconBase + 'clinic.svg'
-	    },
-	    testing: {
-	      icon: iconBase + 'testingcentermarker.svg'
-	    },
-	    ryan: {
-	      icon: iconBase + 'ryan.svg'
-	    },
-	};
-
-	var features = [
-	    {
-	      position: new google.maps.LatLng(-33.91721, 151.22630),
-	      type: 'clinic'
-	    }, 
-	    {
-	      position: new google.maps.LatLng(-34.91721, 151.22630),
-	      type: 'testing'
-	    }, {
-	      position: new google.maps.LatLng(-35.91721, 151.22630),
-	      type: 'ryan'
-	    }, 
-	];
-
-	// Create markers.
-	features.forEach(function(feature) {
-	    var marker = new google.maps.Marker({
-	      position: feature.position,
-	      icon: icons[feature.type].icon,
-	      map: map
-	    });
-	});
-	*/
-
 
 	function init () {
 		setupListeners();

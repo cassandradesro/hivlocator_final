@@ -4,6 +4,7 @@
     <title>Simple Map</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,900" rel="stylesheet">
 
     <link href="styles.css" rel="stylesheet" />
 
@@ -16,6 +17,14 @@
         <h1>Search HIV Testing Locations in Your City:</h1>
         <label>Enter Zip Code: </label><input id="query" type="text" />
         <button id="btn">Search</button>
+
+        <fieldset class="type-form">
+          <legend>Select service center type</legend> 
+          <ul class="checkbox"> 
+            <li><input type="checkbox" id="testing" value="Testing CEnters" /><label for="testing">HIV Testing Centers</label></li> 
+            <li><input type="checkbox" id="clinics" value="Clinics" /><label for="clinics">Clinics</label></li> 
+            <li><input type="checkbox" id="ryanwhite" value="Ryan White Providers" /><label for="ryanwhite">Ryan White Providers</label></li> 
+        </fieldset>
       </div>
       <ul class="results"></ul>    
     </div>
