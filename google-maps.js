@@ -31,6 +31,14 @@ var GoogleMapModule = (function() {
 	}
 	shared.createMarker = createMarker;
 
+	function removeMarkers(place){
+		var marker = new google.maps.Marker({
+			map: map,
+			position: null,
+		});
+	}
+	shared.removeMarkers = removeMarkers;
+
 	// function setMapOnAll(map) {
 	//   for (var i = 0; i < markers.length; i++) {
 	//     markers[i].setMap(map);
@@ -72,6 +80,20 @@ var GoogleMapModule = (function() {
         }, placeResults);
 	}
 	shared.searchForPlaces = searchForPlaces;
+	
+
+
+	function recenterMapByZip(zip){
+
+		//when user enters zipcode, ask google lat/lng of the zip
+
+		//then tell the map to recenter on that lat long (1 function)
+
+
+	}
+	shared.recenterMapByZip = recenterMapByZip;
+	
+
 
 	function initMap() {
 	  map = new google.maps.Map(document.getElementById('map'), {

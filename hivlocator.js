@@ -41,6 +41,7 @@ var AppModule = (function () {
 	function addLocationsToMap(data){
 		console.log('got data', data);
 
+		GoogleMapModule.removeMarkers(markerData);
 		// loop through the services array (in the data)
 		var services = data.services;
 
@@ -59,7 +60,7 @@ var AppModule = (function () {
 					lat: parseFloat(provider.point.lat), 
 					lng: parseFloat(provider.point.long)
 				}
-				markerData.content = `<div class="marker-content"><a href="${provider.link} target="_blank" id="title">${provider.title}</a><br/><a href="" target="_blank" id="address">${provider.streetAddress}</a><br/<a href"" target="_blank">${provider.telephone}</a></div>`;
+				markerData.content = `<div class="marker-content"><a href="${provider.link}" target="_blank" id="title">${provider.title}</a></br><a href="http://google.com/search?q=${provider.streetAddress}" target="_blank" id="address">${provider.streetAddress}</a></br><a href"" target="_blank">Contact: ${provider.telephone}</a></div>`;
 				markerData.icon = serviceTypeIcon;
 
 				var createdMarker = GoogleMapModule.createMarker(markerData);
@@ -70,23 +71,24 @@ var AppModule = (function () {
 		}
 	}
 
-	//add checkbox if statement
 	function setMapOnAll(map, type) {
 		console.log(map);
 		       for (var i = 0; i < markersByServiceType[type].length; i++) {
 		         markersByServiceType[type][i].setMap(map);
 		       }
 	}
-	
-	var checkbox = document.querySelectorAll(".checkbox");
+
+	shared.setMapOnAll = setMapOnAll;
+
+	var checkbox = document.querySelectorAll(".checkbox"); 	//add checkbox if statement
 	for (var i = checkbox.length - 1; i >= 0; i--) {
 		checkbox[i].addEventListener('change', function(e) {
 
 			if(e.target.classList.contains('checkbox')) {
 		     	if(e.target.checked) {
-		     		setMapOnAll(GoogleMapModule.map,e.target.id)
+		     		setMapOnAll(GoogleMapModule.map, e.target.id)
 		     	} else {
-		     		setMapOnAll(null,e.target.id)
+		     		setMapOnAll(null, e.target.id)
 		     	}
 			};
 		});

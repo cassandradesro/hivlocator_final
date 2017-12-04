@@ -22,13 +22,21 @@ strong {
 button{
   font-family: 'Montserrat', sans-serif;
   padding: 10px 20px;
+  margin-top: 30px;
+  width: 300px;
+  background: #4E9CB5;
+  color: #fff;
+  font-size: 1rem;
 }
-
+input#query{
+  width: 300px;
+  height: 20px;
+}
 #search {
   position: absolute;
   width: 25%;
   height: 100%;
-  background:  #EB102F;
+  background:  #f7f7f7;
   padding: 20px;
   border: 1px solid #999;
 
@@ -39,6 +47,11 @@ button{
 
   border: 1px solid #000;
   padding: 10px;
+}
+
+.marker-content a{
+  line-height: 25px;
+
 }
 
 #title{
@@ -55,6 +68,23 @@ h1{
 
 }
 
-.checkbox li{
+.checkboxes li {
   list-style: none;
 }
+
+.checkboxes li img{
+  margin: 0 10px;
+  width:20px;
+  height: 20px;
+}
+
+.type-form {
+  margin-top: 100px;
+}
+
+
+
+
+
+
+
