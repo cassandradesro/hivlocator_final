@@ -14,28 +14,6 @@ var GoogleMapModule = (function() {
         }
 	}
 
-	//function geocode(address) {
-	//	var input = document.getElementById('q');
-	//	var searchTerm = input.value;
-	//	var api_key = 'AIzaSyBs3JbTm5Mmh-oL70aSuANrBeSiUzhIXDk';
-	//	
-	//	var url = "https://maps.googleapis.com/maps/api/geocode/json?";
-	//	url += 'address=' + encodeURIComponent(searchTerm);
-	//	url += '&key=' + api_key;
-
-	//	fetch(url, {
-	//		method: 'GET', 
-	//	})
-
-	//	.then(response => returnJson(response)) //processing the response
-	//	//this code is always going to be the same!
-
-	//	.then(allData => processTheData(allData))
-	//}
-
-	//function processTheData (allData){
-	//	
-	//}
 	function createMarker(place) {
 		var marker = new google.maps.Marker({
 			map: map,
@@ -53,12 +31,33 @@ var GoogleMapModule = (function() {
 	}
 	shared.createMarker = createMarker;
 
-
-
-	function recenterMapOnZip(zip) {
-
+	function setMapOnAll(map) {
+	  for (var i = 0; i < markers.length; i++) {
+	    markers[i].setMap(map);
+	  }
 	}
-	shared.recenterMapOnZip = recenterMapOnZip;
+	// Removes the markers from the map, but keeps them in the array.
+	function clearMarkers() {
+	  setMapOnAll(null);
+	}
+
+	shared.clearMarkers = clearMarkers;
+	
+	// Shows any markers currently in the array.
+	function showMarkers() {
+	  setMapOnAll(map);
+	}
+	shared.showMarkers = showMarkers;
+
+	// Deletes all markers in the array by removing references to them.
+	function deleteMarkers() {
+	  clearMarkers();
+	  markers = [];
+	}
+	shared.deleteMarkers = deleteMarkers;
+
+
+	shared.setMapOnAll = setMapOnAll;
 
 
 	// Call GoogleMapModule.searchForPlaces(term) to put places on map.
@@ -85,7 +84,7 @@ var GoogleMapModule = (function() {
           map: map
         });
 
-	   var contentString = '<h1>Hi!</h1> <p> I am an <strong>explanation</strong> popup!</p>';
+	   var contentString = '<h1>You are here</h1>';
 	   infowindow = new google.maps.InfoWindow({
 	     content: contentString
 	   });

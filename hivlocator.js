@@ -16,6 +16,7 @@ var LocatorModule = (function () {
 		btn.addEventListener('click', search);
 	}
 
+
 	function search (evt){
 		evt.preventDefault();
 		var input = document.querySelector('#query');
@@ -60,8 +61,20 @@ var LocatorModule = (function () {
 				}
 				markerData.content = `<div class="marker-content"><a href="${provider.link} target="_blank" id="title">${provider.title}</a><br/><a href="" target="_blank" id="address">${provider.streetAddress}</a><br/<a href"" target="_blank">${provider.telephone}</a></div>`;
 				markerData.icon = serviceTypeIcon;
+
 				var createdMarker = GoogleMapModule.createMarker(markerData);
-				markersByServiceType[ services[i].serviceType ].push(createdMarker);	
+				markersByServiceType[ services[i].serviceType ].push(createdMarker);
+
+				//add checkbox if statement
+				var checkbox = document.querySelector("input[type=checkbox]");
+
+				checkbox.addEventListener( function() {
+				    if(checkbox.checked) {
+				        markersByServiceType[ services[i].serviceType].clearMarkers()
+				    } else {
+				        markersByServiceType[ services[i].serviceType].showMarkers()
+				    }
+				});	
 			}
 		}
 	}
@@ -77,6 +90,38 @@ var LocatorModule = (function () {
 	return shared
 }())
 
-window.onload = function(){
-	LocatorModule.init();
-};
+//window.onload = function(){
+//	LocatorModule.init();
+//};
+
+// // Adds a marker to the map and push to the array.
+// function addMarker(location) {
+//   var marker = new google.maps.Marker({
+//     position: location,
+//     map: map
+//   });
+//   markers.push(marker);
+// }
+
+// // Sets the map on all markers in the array.
+// function setMapOnAll(map) {
+//   for (var i = 0; i < markers.length; i++) {
+//     markers[i].setMap(map);
+//   }
+// }
+
+// // Removes the markers from the map, but keeps them in the array.
+// function clearMarkers() {
+//   setMapOnAll(null);
+// }
+
+// // Shows any markers currently in the array.
+// function showMarkers() {
+//   setMapOnAll(map);
+// }
+
+// // Deletes all markers in the array by removing references to them.
+// function deleteMarkers() {
+//   clearMarkers();
+//   markers = [];
+// }

@@ -28,9 +28,10 @@ button{
   position: absolute;
   width: 25%;
   height: 100%;
-  background: white;
+  background:  #EB102F;
   padding: 20px;
   border: 1px solid #999;
+
 }
 
 .marker-content{
