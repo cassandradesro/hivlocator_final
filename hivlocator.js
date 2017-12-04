@@ -1,4 +1,4 @@
-var LocatorModule = (function () {
+var AppModule = (function () {
 	var shared = {}
 
 	var BASE_URL = './locator.php?';
@@ -22,7 +22,7 @@ var LocatorModule = (function () {
 		var input = document.querySelector('#query');
 		var query = input.value; // ZIP code
 
-		GoogleMapModule.recenterMapOnZip( query )
+		//GoogleMapModule.recenterMapOnZip( query )
 
 		var fetchOptions = {
 			method: 'GET', 
@@ -68,7 +68,7 @@ var LocatorModule = (function () {
 				//add checkbox if statement
 				var checkbox = document.querySelector("input[type=checkbox]");
 
-				checkbox.addEventListener( function() {
+				checkbox.addEventListener(function() {
 				    if(checkbox.checked) {
 				        markersByServiceType[ services[i].serviceType].clearMarkers()
 				    } else {
@@ -90,9 +90,9 @@ var LocatorModule = (function () {
 	return shared
 }())
 
-//window.onload = function(){
-//	LocatorModule.init();
-//};
+window.onload = function(){
+	AppModule.init();
+};
 
 // // Adds a marker to the map and push to the array.
 // function addMarker(location) {
