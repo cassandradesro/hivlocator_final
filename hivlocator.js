@@ -47,8 +47,9 @@ var AppModule = (function () {
 		for (var i = 0; i < services.length; i++) {
 			//for each of the services you'll loop through the providers array
 			var providers = services[i].providers;
-			console.log("looping through " + services[i].serviceType + " providers");
-			var serviceTypeIcon = "img/" + services[i].serviceType + ".png";
+			var serviceTypes = services[i].serviceType;
+			console.log("looping through " + serviceTypes + " providers");
+			var serviceTypeIcon = "img/" + serviceTypes + ".png";
 
 			for (var j = 0; j < providers.length; j++) {
 				var provider = providers[j]
@@ -63,16 +64,16 @@ var AppModule = (function () {
 				markerData.icon = serviceTypeIcon;
 
 				var createdMarker = GoogleMapModule.createMarker(markerData);
-				markersByServiceType[ services[i].serviceType ].push(createdMarker);
+				markersByServiceType[ serviceTypes ].push(createdMarker);
 
 				//add checkbox if statement
 				var checkbox = document.querySelector("input[type=checkbox]");
 
 				checkbox.addEventListener('change', function() {
 				    if(checkbox.checked) {
-				        markersByServiceType[ services[i].serviceType].clearMarkers()
+				        markersByServiceType[serviceTypes].clearMarkers()
 				    } else {
-				        markersByServiceType[ services[i].serviceType].showMarkers()
+				        markersByServiceType[serviceTypes].showMarkers()
 				    }
 				});	
 			}
