@@ -68,7 +68,7 @@ var AppModule = (function () {
 				//add checkbox if statement
 				var checkbox = document.querySelector("input[type=checkbox]");
 
-				checkbox.addEventListener(function() {
+				checkbox.addEventListener('change', function() {
 				    if(checkbox.checked) {
 				        markersByServiceType[ services[i].serviceType].clearMarkers()
 				    } else {
