@@ -47,9 +47,8 @@ var AppModule = (function () {
 		for (var i = 0; i < services.length; i++) {
 			//for each of the services you'll loop through the providers array
 			var providers = services[i].providers;
-			var serviceTypes = services[i].serviceType;
-			console.log("looping through " + serviceTypes + " providers");
-			var serviceTypeIcon = "img/" + serviceTypes + ".png";
+			console.log("looping through " + services[i].serviceType + " providers");
+			var serviceTypeIcon = "img/" + services[i].serviceType + ".png";
 
 			for (var j = 0; j < providers.length; j++) {
 				var provider = providers[j]
@@ -64,20 +63,33 @@ var AppModule = (function () {
 				markerData.icon = serviceTypeIcon;
 
 				var createdMarker = GoogleMapModule.createMarker(markerData);
-				markersByServiceType[ serviceTypes ].push(createdMarker);
+				markersByServiceType[ services[i].serviceType ].push(createdMarker);
 
-				//add checkbox if statement
-				var checkbox = document.querySelector("input[type=checkbox]");
 
-				checkbox.addEventListener('change', function() {
-				    if(checkbox.checked) {
-				        markersByServiceType[serviceTypes].clearMarkers()
-				    } else {
-				        markersByServiceType[serviceTypes].showMarkers()
-				    }
-				});	
 			}
 		}
+	}
+
+	//add checkbox if statement
+	function setMapOnAll(map, type) {
+		console.log(map);
+		       for (var i = 0; i < markersByServiceType[type].length; i++) {
+		         markersByServiceType[type][i].setMap(map);
+		       }
+	}
+	
+	var checkbox = document.querySelectorAll(".checkbox");
+	for (var i = checkbox.length - 1; i >= 0; i--) {
+		checkbox[i].addEventListener('change', function(e) {
+
+			if(e.target.classList.contains('checkbox')) {
+		     	if(e.target.checked) {
+		     		setMapOnAll(GoogleMapModule.map,e.target.id)
+		     	} else {
+		     		setMapOnAll(null,e.target.id)
+		     	}
+			};
+		});
 	}
 
 	function init () {

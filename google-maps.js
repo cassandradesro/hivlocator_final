@@ -31,11 +31,11 @@ var GoogleMapModule = (function() {
 	}
 	shared.createMarker = createMarker;
 
-	function setMapOnAll(map) {
-	  for (var i = 0; i < markers.length; i++) {
-	    markers[i].setMap(map);
-	  }
-	}
+	// function setMapOnAll(map) {
+	//   for (var i = 0; i < markers.length; i++) {
+	//     markers[i].setMap(map);
+	//   }
+	// }
 	// Removes the markers from the map, but keeps them in the array.
 	function clearMarkers() {
 	  setMapOnAll(null);
@@ -57,7 +57,7 @@ var GoogleMapModule = (function() {
 	shared.deleteMarkers = deleteMarkers;
 
 
-	shared.setMapOnAll = setMapOnAll;
+	// shared.setMapOnAll = setMapOnAll;
 
 
 	// Call GoogleMapModule.searchForPlaces(term) to put places on map.
@@ -92,8 +92,12 @@ var GoogleMapModule = (function() {
 	   marker.addListener('click', function() {
 	   	infowindow.open(map, marker);
 	   });
+
+	   shared.map = map;
 	}
 	shared.init = initMap;
+
+
 
 	return shared;
 }());
