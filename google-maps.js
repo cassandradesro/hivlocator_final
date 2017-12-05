@@ -9,6 +9,7 @@ var GoogleMapModule = (function() {
 
 	function placeResults(results, status) {
 		if (status === google.maps.places.PlacesServiceStatus.OK) {
+
           for (var i = 0; i < results.length; i++) {
             createMarker(results[i]);
           }
@@ -29,6 +30,8 @@ var GoogleMapModule = (function() {
 
 		markers.push(marker);
 
+		bounds.extend(place.coordinates);
+		map.fitBounds(bounds);
 		return marker;
 
 
@@ -36,6 +39,8 @@ var GoogleMapModule = (function() {
 	shared.createMarker = createMarker;
 
 	function removeMarkers(place){
+		bounds = new google.maps.LatLngBounds();
+
 		for (var i = 0; i < markers.length; i++) {
 			markers[i].setMap(null);
 		}
@@ -92,6 +97,7 @@ var GoogleMapModule = (function() {
 	   	infowindow.open(map, marker);
 	   });
 
+	   removeMarkers();
 	   shared.map = map;
 	}
 	shared.init = initMap;

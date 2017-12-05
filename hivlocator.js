@@ -62,6 +62,9 @@ var AppModule = (function () {
 					lat: parseFloat(provider.point.lat), 
 					lng: parseFloat(provider.point.long)
 				}
+
+				
+
 				markerData.content = `<div class="marker-content"><a href="${provider.link}" target="_blank" id="title">${provider.title}</a></br><a href="http://google.com/search?q=${provider.streetAddress}" target="_blank" id="address">${provider.streetAddress}</a></br><a href"" target="_blank">Contact: ${provider.telephone}</a></div>`;
 				markerData.icon = serviceTypeIcon;
 
@@ -72,6 +75,8 @@ var AppModule = (function () {
 			}
 		}
 	}
+
+
 
 	function setMapOnAll(map, type) {
 		console.log(map);
