@@ -5,6 +5,7 @@ var GoogleMapModule = (function() {
 	var infowindow;
 	var startingPoint = {lat: 33.813245, lng: -84.362171};
 	shared.startingPoint = startingPoint;
+	var markers = [];
 
 	function placeResults(results, status) {
 		if (status === google.maps.places.PlacesServiceStatus.OK) {
@@ -26,46 +27,21 @@ var GoogleMapModule = (function() {
 			infowindow.open(map, marker);
 		})
 
+		markers.push(marker);
+
 		return marker;
+
 
 	}
 	shared.createMarker = createMarker;
 
 	function removeMarkers(place){
-		var marker = new google.maps.Marker({
-			map: map,
-			position: null,
-		});
+		for (var i = 0; i < markers.length; i++) {
+			markers[i].setMap(null);
+		}
+
 	}
-	shared.removeMarkers = removeMarkers;
-
-	// function setMapOnAll(map) {
-	//   for (var i = 0; i < markers.length; i++) {
-	//     markers[i].setMap(map);
-	//   }
-	// }
-	// Removes the markers from the map, but keeps them in the array.
-	function clearMarkers() {
-	  setMapOnAll(null);
-	}
-
-	shared.clearMarkers = clearMarkers;
-	
-	// Shows any markers currently in the array.
-	function showMarkers() {
-	  setMapOnAll(map);
-	}
-	shared.showMarkers = showMarkers;
-
-	// Deletes all markers in the array by removing references to them.
-	function deleteMarkers() {
-	  clearMarkers();
-	  markers = [];
-	}
-	shared.deleteMarkers = deleteMarkers;
-
-
-	// shared.setMapOnAll = setMapOnAll;
+	shared.removeMarkers = removeMarkers
 
 
 	// Call GoogleMapModule.searchForPlaces(term) to put places on map.
@@ -86,6 +62,7 @@ var GoogleMapModule = (function() {
 	function recenterMapByZip(zip){
 
 		//when user enters zipcode, ask google lat/lng of the zip
+
 
 		//then tell the map to recenter on that lat long (1 function)
 

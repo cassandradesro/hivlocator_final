@@ -41,7 +41,9 @@ var AppModule = (function () {
 	function addLocationsToMap(data){
 		console.log('got data', data);
 
-		GoogleMapModule.removeMarkers(markerData);
+		GoogleMapModule.removeMarkers();
+
+
 		// loop through the services array (in the data)
 		var services = data.services;
 
