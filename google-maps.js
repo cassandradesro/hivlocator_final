@@ -4,7 +4,7 @@ var GoogleMapModule = (function() {
 	var map;
 	var infowindow;
 	var startingPoint = {lat: 33.813245, lng: -84.362171};
-	shared.startingPoint = startingPoint;
+	shared.startingPoint = startingPoint; 
 	var markers = [];
 
 	function placeResults(results, status) {
@@ -32,10 +32,10 @@ var GoogleMapModule = (function() {
 
 		bounds.extend(place.coordinates);
 		map.fitBounds(bounds);
+
 		return marker;
-
-
 	}
+
 	shared.createMarker = createMarker;
 
 	function removeMarkers(place){
@@ -44,10 +44,9 @@ var GoogleMapModule = (function() {
 		for (var i = 0; i < markers.length; i++) {
 			markers[i].setMap(null);
 		}
-
 	}
-	shared.removeMarkers = removeMarkers
 
+	shared.removeMarkers = removeMarkers
 
 	// Call GoogleMapModule.searchForPlaces(term) to put places on map.
 
@@ -60,49 +59,48 @@ var GoogleMapModule = (function() {
           keyword: term
         }, placeResults);
 	}
+
 	shared.searchForPlaces = searchForPlaces;
 	
-
-
-	function recenterMapByZip(zip){
-
-		//when user enters zipcode, ask google lat/lng of the zip
-
-
-		//then tell the map to recenter on that lat long (1 function)
-
-
-	}
-	shared.recenterMapByZip = recenterMapByZip;
-	
-
-
 	function initMap() {
-	  map = new google.maps.Map(document.getElementById('map'), {
-	    center: startingPoint,
-	    zoom: 14
-	  });
-
-	   var marker = new google.maps.Marker({
-          position: startingPoint,
-          map: map
-        });
-
-	   var contentString = '<h1>You are here</h1>';
-	   infowindow = new google.maps.InfoWindow({
-	     content: contentString
+	   map = new google.maps.Map(document.getElementById('map'), {
+	     center: startingPoint,
+	     zoom: 14
 	   });
 
-	   marker.addListener('click', function() {
-	   	infowindow.open(map, marker);
-	   });
+	   infowindow = new google.maps.InfoWindow();
 
 	   removeMarkers();
+
+	   function getUsersMap_Success(position) {
+	   		successStartingPoint = {lat: position.coords.latitude, lng: position.coords.longitude};
+	   		map.setCenter(successStartingPoint);
+
+	   		var userMarkerData = {};
+	   		userMarkerData.coordinates = successStartingPoint;
+
+	   		userMarkerData.content= '<h1>You are here</h1>';
+
+	   		createMarker(userMarkerData);
+
+	   		map.setZoom(12);
+	   }
+
+	   function getUsersMap_Error() {
+	   		var defaultMarkerData = {};
+	   		defaultMarkerData.coordinates = startingPoint;
+	
+	   		defaultMarkerData.content= '<h1>This HIV Locator was made at The Creative Circus in Atlanta, GA</h1>';
+	
+	   		createMarker(defaultMarkerData);       
+	   }
+
+	   navigator.geolocation.getCurrentPosition(getUsersMap_Success, getUsersMap_Error);
+	   
 	   shared.map = map;
 	}
+
 	shared.init = initMap;
-
-
 
 	return shared;
 }());

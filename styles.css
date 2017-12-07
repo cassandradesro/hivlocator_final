@@ -19,7 +19,7 @@ strong {
   color: blue;
 }
 
-button{
+button {
   font-family: 'Montserrat', sans-serif;
   padding: 10px 20px;
   margin-top: 30px;
@@ -28,10 +28,12 @@ button{
   color: #fff;
   font-size: 1rem;
 }
-input#query{
-  width: 300px;
+
+input#query {
+  width: 80%;
   height: 20px;
 }
+
 #search {
   position: absolute;
   width: 25%;
@@ -39,19 +41,18 @@ input#query{
   background:  #f7f7f7;
   padding: 20px;
   border: 1px solid #999;
-
+  overflow: scroll;
 }
 
 .marker-content{
   font-family: 'Montserrat', sans-serif;
-
-  border: 1px solid #000;
-  padding: 10px;
+/*  border: 1px solid #000;
+  padding: 10px;*/
 }
 
-.marker-content a{
+.marker-content li{
   line-height: 25px;
-
+  list-style: none;
 }
 
 #title{
@@ -65,7 +66,6 @@ h1{
 
 .typeform{
     font-family: 'Montserrat', sans-serif;
-
 }
 
 .checkboxes li {
@@ -83,8 +83,48 @@ h1{
 }
 
 
+@media only screen and (max-width: 1024px) {  
 
+  #map {
+    height: 50%;
+    width: 100%;
+    position: relative;
+    
+  }
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
 
+  }
 
+  strong {
+    color: blue;
+  }
+
+  button{
+    font-family: 'Montserrat', sans-serif;
+    padding: 10px 20px;
+    margin-top: 30px;
+    width: 300px;
+    background: #4E9CB5;
+    color: #fff;
+    font-size: 1rem;
+  }
+  input#query{
+    width: 80%;
+    height: 20px;
+    text-align: center;
+  }
+  #search {
+    width: 100%;
+
+  }
+}
+
+.results li{
+  list-style: none;
+}
 
 

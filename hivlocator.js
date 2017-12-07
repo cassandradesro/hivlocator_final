@@ -47,6 +47,12 @@ var AppModule = (function () {
 		// loop through the services array (in the data)
 		var services = data.services;
 
+		var resultEl = document.querySelector('.results');
+
+		while (resultEl.hasChildNodes()){
+			resultEl.removeChild(resultEl.lastChild);
+		}
+
 		for (var i = 0; i < services.length; i++) {
 			//for each of the services you'll loop through the providers array
 			var providers = services[i].providers;
@@ -65,8 +71,24 @@ var AppModule = (function () {
 
 				
 
-				markerData.content = `<div class="marker-content"><a href="${provider.link}" target="_blank" id="title">${provider.title}</a></br><a href="http://google.com/search?q=${provider.streetAddress}" target="_blank" id="address">${provider.streetAddress}</a></br><a href"" target="_blank">Contact: ${provider.telephone}</a></div>`;
+				markerData.content = 
+				`<div class="marker-content">
+					<li><a href="${provider.link}" target="_blank" id="title">${provider.title}</a></li>
+					</br>
+					<li><a href="http://google.com/search?q=${provider.streetAddress}, ${provider.region} ,${provider.postalCode}" target="_blank" id="address">${provider.streetAddress}, ${provider.region}, ${provider.postalCode}</a></li>
+					</br>
+					<li><a href"" target="_blank">Contact: ${provider.telephone}</a></li>
+				</div>`;
+
+
 				markerData.icon = serviceTypeIcon;
+
+				
+
+				var li = document.createElement("li");
+				li.innerHTML = markerData.content;
+
+				resultEl.appendChild(li);
 
 				var createdMarker = GoogleMapModule.createMarker(markerData);
 				markersByServiceType[ services[i].serviceType ].push(createdMarker);
